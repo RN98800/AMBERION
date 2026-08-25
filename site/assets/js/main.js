@@ -39,11 +39,18 @@
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
-  /* ---------- Mark the current page in the nav ---------- */
-  var here = location.pathname.split('/').pop() || 'index.html';
+  /* ---------- Mark the current page in the nav ----------
+     Normalised so it matches whether the host serves `/about.html`, `/about`
+     or `/about/`, and treats a bare `/` as the home page. */
+  var normalise = function (path) {
+    var last = path.split('/').filter(Boolean).pop() || 'index';
+    return last.replace(/\.html$/, '').toLowerCase();
+  };
+  var here = normalise(location.pathname);
   document.querySelectorAll('.nav__link').forEach(function (link) {
-    var target = link.getAttribute('href');
-    if (target === here) link.setAttribute('aria-current', 'page');
+    if (normalise(link.getAttribute('href') || '') === here) {
+      link.setAttribute('aria-current', 'page');
+    }
   });
 
   /* ---------- Scroll reveal ----------
