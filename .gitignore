@@ -1,0 +1,9 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Internal source brief — not published with the site
+*.docx
