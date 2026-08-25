@@ -9,7 +9,7 @@ Host it anywhere that serves static files (Netlify, Vercel, Cloudflare Pages, S3
 ## Run locally
 
 ```bash
-python -m http.server 8000
+cd site && python -m http.server 8000
 ```
 
 Then open http://localhost:8000
@@ -17,7 +17,9 @@ Then open http://localhost:8000
 ## Structure
 
 ```
-site/
+.
+├── vercel.json       Vercel config — serves site/ as the output directory
+└── site/
 ├── index.html        Home
 ├── about.html        About
 ├── services.html     Services (3 pillars, anchored sections)
@@ -25,6 +27,7 @@ site/
 ├── insights.html     Insights (planned editorial programme)
 ├── careers.html      Careers
 ├── contact.html      Contact + enquiry form + map
+├── 404.html          Branded not-found page
 ├── robots.txt
 ├── sitemap.xml
 └── assets/
@@ -86,3 +89,14 @@ via `data-mailto`.
    `<meta property="og:image">`.
 5. Add analytics if required.
 6. Re-run the link check and test on a real mobile device.
+
+## Deployment
+
+Deployed on Vercel from the `main` branch of `RN98800/AMBERION` (private repo).
+`vercel.json` at the repo root pins `outputDirectory` to `site`, so `/` serves
+`site/index.html`. Pushing to `main` triggers a redeploy.
+
+Live: https://amberion.vercel.app
+
+This README lives at the repo root, deliberately outside `site/`, so it is not
+published as part of the website.
